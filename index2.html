@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>this is my first 3d design on the web</title>
+  </head>
+  <body>
+    <h1>My first 3D design</h1>
+    <input type="number" name="" id="">
+    <script src="./three.js"></script>
+    <script type="module" src="./OBJLoader.js"></script>
+    <script type="module" src="./GLTFLoader.js"></script>
+    <script type="module" src="./MTLLoader.js"></script>
+    <script type="module">
+      import {OBJLoader} from "./OBJLoader.js";
+      import {MTLLoader} from "./MTLLoader.js";
+      import {GLTFLoader} from "./GLTFLoader.js";
+      let camera,scene,renderer,object;
+
+      camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.8, 1000);
+			//camera.position.z = 100;
+			//camera.position.y = 500;
+
+     scene=new THREE.Scene();
+    const ambientLight = new THREE.AmbientLight( 0xffffff,1.0);
+			scene.add( ambientLight );
+
+      const pointLight = new THREE.PointLight( 0xFFFFFF,1);
+      camera.add( pointLight );
+      scene.add( camera );
+      
+      var light=new THREE.HemisphereLight(0xffffff,0x000000,2);
+      scene.add(light)
+     /* 
+      function loadModel() {
+
+					object.traverse( function ( child ) {
+
+						if ( child.isMesh ) child.material.map = texture;
+
+					} );
+
+					object.position.y = - 95;
+					scene.add( object );
+
+				}
+        
+        const manager = new THREE.LoadingManager( loadModel );
+
+				manager.onProgress = function ( item, loaded, total ) {
+
+					console.log( item, loaded, total );
+
+				};
+
+
+				const textureLoader = new THREE.TextureLoader( manager );
+				const texture = textureLoader.load( 'textures/uv_grid_opengl.jpg' );*/
+
+        function onProgress( xhr ) {
+
+					if ( xhr.lengthComputable ) {
+
+						const percentComplete = xhr.loaded / xhr.total * 100;
+						console.log( 'model ' + Math.round( percentComplete, 2 ) + '% downloaded' );
+
+					}
+
+				} 
+
+        function onError() {}
+
+        renderer = new THREE.WebGLRenderer( { antialias: true } );
+				renderer.setPixelRatio( window.devicePixelRatio );
+				renderer.setSize( window.innerWidth, window.innerHeight );
+				renderer.toneMapping = THREE.ACESFilmicToneMapping;
+				renderer.toneMappingExposure = 1;
+				renderer.outputEncoding = THREE.sRGBEncoding;
+
+        document.body.appendChild(renderer.domElement);
+
+      /*  var mtlLoader=new MTLLoader();
+        mtlLoader.load('./first_design.mtl',function(materials){
+          materials.preload();
+
+        })*/
+
+        var loader=new GLTFLoader();
+          //loader.setMaterials(materials);
+
+          loader.load("./scene.gltf",function(obj){
+            object=obj.scene;
+            scene.add(obj.scene);
+        },onProgress,onError);
+
+        camera.position.set(0,1,500);
+      
+        
+        scene.background=new THREE.Color(0xffffff);
+
+
+       function animate(){
+
+              requestAnimationFrame(animate);
+              object.rotation.y+=0.01;
+					    //object.position.y = - 95;
+              camera.lookAt(scene.position)
+              renderer.render(scene,camera)
+        }
+        animate();
+    </script>
+  </body>
+</html>

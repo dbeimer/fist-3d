@@ -1,0 +1,11 @@
+Model Information:
+* title:	Torreta da kill joy
+* source:	https://sketchfab.com/3d-models/torreta-da-kill-joy-1fe7a4d7645144c2952356e7726144d2
+* author:	Caio de Oliveira (https://sketchfab.com/caio17011)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Torreta da kill joy" (https://sketchfab.com/3d-models/torreta-da-kill-joy-1fe7a4d7645144c2952356e7726144d2) by Caio de Oliveira (https://sketchfab.com/caio17011) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
